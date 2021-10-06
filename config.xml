@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>camaloon</name>
+	<displayName><![CDATA[Camaloon Print on Demand ]]></displayName>
+	<version><![CDATA[1.0.0]]></version>
+	<description><![CDATA[Camaloon Print on Demand ]]></description>
+	<author><![CDATA[Camaloon]]></author>
+	<tab><![CDATA[administration]]></tab>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+</module>
