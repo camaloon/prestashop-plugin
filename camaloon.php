@@ -32,27 +32,34 @@ class Camaloon extends Module
 {
     protected $config_form = false;
 
+    const HOME_CONTROLLER = 'CamaloonHome';
+    const CONNECT_CONTROLLER = 'CamaloonConnect';
+
     public function __construct()
     {
         $this->name = 'camaloon';
-        $this->tab = 'administration';
+        $this->tab = 'other_modules';
         $this->version = '1.0.0';
         $this->author = 'Camaloon';
         $this->need_instance = 1;
-
-        /**
-         * Set $this->bootstrap to true if your module is compliant with bootstrap (PrestaShop 1.6)
-         */
         $this->bootstrap = true;
 
         parent::__construct();
+        $this->autoLoad();
 
-        $this->displayName = $this->l('Camaloon Print on Demand ');
-        $this->description = $this->l('Camaloon Print on Demand ');
+        $this->displayName = $this->l('Camaloon Print on Demand');
+        $this->description = $this->l('Camaloon Print on Demand');
 
         $this->confirmUninstall = $this->l('');
 
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+    }
+
+    private function autoLoad()
+    {
+        $autoLoadPath = $this->getLocalPath() . 'vendor/autoload.php';
+
+        require_once $autoLoadPath;
     }
 
     /**
@@ -68,6 +75,7 @@ class Camaloon extends Module
         return parent::install() &&
             $this->registerHook('header') &&
             $this->registerHook('backOfficeHeader') &&
+            $this->registerHook('displayBackOfficeHeader') &&
             $this->registerHook('actionProductAdd');
     }
 
@@ -80,132 +88,35 @@ class Camaloon extends Module
         return parent::uninstall();
     }
 
-    /**
-     * Load the configuration form
-     */
+    public function getTabs()
+    {
+        return array(
+            array(
+                'name' => $this->l('Camaloon'),
+                'class_name' => self::HOME_CONTROLLER,
+                'ParentClassName' => 'SELL',
+            )
+        );
+    }
+
+
     public function getContent()
     {
-        /**
-         * If values have been submitted in the form, process.
-         */
-        if (((bool)Tools::isSubmit('submitCamaloonModule')) == true) {
-            $this->postProcess();
-        }
-
-        $this->context->smarty->assign('module_dir', $this->_path);
-
-        $output = $this->context->smarty->fetch($this->local_path.'views/templates/admin/configure.tpl');
-
-        return $output.$this->renderForm();
+        $redirectLink = $this->context->link->getAdminLink(self::HOME_CONTROLLER);
+        Tools::redirectAdmin($redirectLink);
     }
 
     /**
-     * Create the form that will be displayed in the configuration of your module.
+     * Include tab css for icon
      */
-    protected function renderForm()
+    public function hookDisplayBackOfficeHeader()
     {
-        $helper = new HelperForm();
-
-        $helper->show_toolbar = false;
-        $helper->table = $this->table;
-        $helper->module = $this;
-        $helper->default_form_language = $this->context->language->id;
-        $helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG', 0);
-
-        $helper->identifier = $this->identifier;
-        $helper->submit_action = 'submitCamaloonModule';
-        $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false)
-            .'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
-        $helper->token = Tools::getAdminTokenLite('AdminModules');
-
-        $helper->tpl_vars = array(
-            'fields_value' => $this->getConfigFormValues(), /* Add values for your inputs */
-            'languages' => $this->context->controller->getLanguages(),
-            'id_language' => $this->context->language->id,
-        );
-
-        return $helper->generateForm(array($this->getConfigForm()));
+      $this->context->controller->addCss($this->_path . 'views/css/tab.css');
     }
 
     /**
-     * Create the structure of your form.
+     * Add the CSS & JavaScript files you want to be loaded in the BO.
      */
-    protected function getConfigForm()
-    {
-        return array(
-            'form' => array(
-                'legend' => array(
-                'title' => $this->l('Settings'),
-                'icon' => 'icon-cogs',
-                ),
-                'input' => array(
-                    array(
-                        'type' => 'switch',
-                        'label' => $this->l('Live mode'),
-                        'name' => 'CAMALOON_LIVE_MODE',
-                        'is_bool' => true,
-                        'desc' => $this->l('Use this module in live mode'),
-                        'values' => array(
-                            array(
-                                'id' => 'active_on',
-                                'value' => true,
-                                'label' => $this->l('Enabled')
-                            ),
-                            array(
-                                'id' => 'active_off',
-                                'value' => false,
-                                'label' => $this->l('Disabled')
-                            )
-                        ),
-                    ),
-                    array(
-                        'col' => 3,
-                        'type' => 'text',
-                        'prefix' => '<i class="icon icon-envelope"></i>',
-                        'desc' => $this->l('Enter a valid email address'),
-                        'name' => 'CAMALOON_ACCOUNT_EMAIL',
-                        'label' => $this->l('Email'),
-                    ),
-                    array(
-                        'type' => 'password',
-                        'name' => 'CAMALOON_ACCOUNT_PASSWORD',
-                        'label' => $this->l('Password'),
-                    ),
-                ),
-                'submit' => array(
-                    'title' => $this->l('Save'),
-                ),
-            ),
-        );
-    }
-
-    /**
-     * Set values for the inputs.
-     */
-    protected function getConfigFormValues()
-    {
-        return array(
-            'CAMALOON_LIVE_MODE' => Configuration::get('CAMALOON_LIVE_MODE', true),
-            'CAMALOON_ACCOUNT_EMAIL' => Configuration::get('CAMALOON_ACCOUNT_EMAIL', 'contact@prestashop.com'),
-            'CAMALOON_ACCOUNT_PASSWORD' => Configuration::get('CAMALOON_ACCOUNT_PASSWORD', null),
-        );
-    }
-
-    /**
-     * Save form data.
-     */
-    protected function postProcess()
-    {
-        $form_values = $this->getConfigFormValues();
-
-        foreach (array_keys($form_values) as $key) {
-            Configuration::updateValue($key, Tools::getValue($key));
-        }
-    }
-
-    /**
-    * Add the CSS & JavaScript files you want to be loaded in the BO.
-    */
     public function hookBackOfficeHeader()
     {
         if (Tools::getValue('module_name') == $this->name) {
