@@ -4,6 +4,40 @@
 
 ### Setup
 - copy the .env.example to .env
+- add a file composer.json and add the content from this page:
+  {
+      "name": "name/prestashop-plugin",
+      "description": "<module description>",
+      "authors": [
+          {
+              "name": "name/prestashop-plugin",
+              "email": "email"
+          }
+      ],
+      "require": {
+          "php": ">=5.6.0"
+      },
+      "autoload": {
+          "psr-4": {
+              "<YourNamespace>\\": "src/"
+          },
+          "classmap": [
+              "camaloon.php"
+          ],
+          "exclude-from-classmap": []
+      },
+      "config": {
+          "preferred-install": "dist",
+          "prepend-autoloader": false
+      },
+      "type": "prestashop-module",
+      "author": "name",
+      "license": "Camaloon"
+  }
+ 
+ Replace name by your name and email by your email.
+
+- run composer dump-autoload (you should see Generated autoload files)
 - run `docker-compose up`
 - go to admin part, by defult (`http://localhost:8083/adminPS`)
 - login to admin part (default credentials `demo@prestashop.com` / `prestashop_demo`)
