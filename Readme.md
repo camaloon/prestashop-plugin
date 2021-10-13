@@ -4,7 +4,7 @@
 
 ### Setup
 - copy the .env.example to .env
-- add a file composer.json and add the content from this page:
+- add a file composer.json and add this content:
   {
       "name": "name/prestashop-plugin",
       "description": "<module description>",
