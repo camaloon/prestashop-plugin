@@ -8,12 +8,6 @@ class CamaloonConnectController extends BaseCamaloonAdminController
     {
         parent::initContent();
         $this->context->smarty->assign(array());
-        $this->setTemplate('connect.tpl');
-    }
-
-    public function setMedia($isNewTheme = false)
-    {
-        $this->addCSS($this->module->getLocalPath() . 'views/css/connect.css');
-        parent::setMedia($isNewTheme);
+        $this->setTemplate('support.tpl');
     }
 }

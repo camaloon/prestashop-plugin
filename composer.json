@@ -1,0 +1,29 @@
+{
+    "name": "benjamin/prestashop-plugin",
+    "description": "<module description>",
+    "authors": [
+        {
+            "name": "benjamin/prestashop-plugin",
+            "email": "benjamin.devoissieu@camaloon.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "<YourNamespace>\\": "src/"
+        },
+        "classmap": [
+            "camaloon.php"
+        ],
+        "exclude-from-classmap": []
+    },
+    "config": {
+        "preferred-install": "dist",
+        "prepend-autoloader": false
+    },
+    "type": "prestashop-module",
+    "author": "benjamin",
+    "license": "Camaloon"
+}

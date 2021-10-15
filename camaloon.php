@@ -32,8 +32,8 @@ class Camaloon extends Module
 {
     protected $config_form = false;
 
-    const HOME_CONTROLLER = 'CamaloonHome';
     const CONNECT_CONTROLLER = 'CamaloonConnect';
+    const ADMIN_SUPPORT_CONTROLLER = 'AdminCamaloonSupport';
 
     public function __construct()
     {
@@ -48,7 +48,7 @@ class Camaloon extends Module
         $this->autoLoad();
 
         $this->displayName = $this->l('Camaloon Print on Demand');
-        $this->description = $this->l('Camaloon Print on Demand');
+        $this->description = $this->l('Print-on-demand is a process where you sell your own custom branded designs on a variety of different products. With print-on-demand there is no need to have any inventory, as products are printed as soon as an order is made through your store.');
 
         $this->confirmUninstall = $this->l('');
 
@@ -93,17 +93,26 @@ class Camaloon extends Module
         return array(
             array(
                 'name' => $this->l('Camaloon'),
-                'class_name' => self::HOME_CONTROLLER,
+                'class_name' => self::CONNECT_CONTROLLER,
                 'ParentClassName' => 'SELL',
+            ),
+            array(
+                'name' => $this->l('Support', __CLASS__),
+                'class_name' => self::ADMIN_SUPPORT_CONTROLLER,
+                'ParentClassName' => self::ADMIN_PARENT_CONTROLLER,
             )
         );
     }
 
-
     public function getContent()
     {
-        $redirectLink = $this->context->link->getAdminLink(self::HOME_CONTROLLER);
+        $redirectLink = $this->context->link->getAdminLink(self::CONNECT_CONTROLLER);
         Tools::redirectAdmin($redirectLink);
+    }
+
+    public function hookActionAdminControllerSetMedia()
+    {
+        $this->context->controller->addCSS($this->getPathUri() . 'views/css/camaloonController.css');
     }
 
     /**
@@ -125,17 +134,9 @@ class Camaloon extends Module
         }
     }
 
-    /**
-     * Add the CSS & JavaScript files you want to be added on the FO.
-     */
-    public function hookHeader()
-    {
-        $this->context->controller->addJS($this->_path.'/views/js/front.js');
-        $this->context->controller->addCSS($this->_path.'/views/css/front.css');
-    }
-
     public function hookActionProductAdd()
     {
         /* Place your code here. */
     }
+
 }

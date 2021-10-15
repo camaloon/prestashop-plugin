@@ -1,0 +1,8 @@
+#subtab-CamaloonConnect i.material-icons.mi-extension:first-of-type{
+    background-image: url("../img/camaloon-logo.svg");
+    background-size: 1em 1em;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    content: "";
+}
