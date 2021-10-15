@@ -10,8 +10,8 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWD}
       - MYSQL_DATABASE=${DB_NAME}
 
-  prestashop_1.7:
-    image: prestashop/prestashop:1.7
+  prestashop_1.6:
+    image: prestashop/prestashop:1.6
     depends_on:
       - mysql
     extra_hosts:
