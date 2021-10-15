@@ -9,7 +9,9 @@ class CamaloonConnectController extends CamaloonPluginController
         parent::initContent();
 
         $this->renderTemplate('connect', array(
-            'title' => 'Connect your store',
+            'title' => 'Camaloon Print on Demand',
+            'connectUrl' => $this->context->link->getAdminLink(Camaloon::CONNECT_CONTROLLER),
+            'disconnectUrl' => $this->context->link->getAdminLink(Camaloon::CONNECT_CONTROLLER)
         ));
     }
 }
