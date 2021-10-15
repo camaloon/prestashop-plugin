@@ -34,6 +34,8 @@ class Camaloon extends Module
 
     const HOME_CONTROLLER = 'CamaloonHome';
     const CONNECT_CONTROLLER = 'CamaloonConnect';
+    const STATUS_CONTROLLER = 'CamaloonStatus';
+    const SUPPORT_CONTROLLER = 'CamaloonSupport';
 
     public function __construct()
     {
@@ -66,8 +68,13 @@ class Camaloon extends Module
      * Don't forget to create update methods if needed:
      * http://doc.prestashop.com/display/PS16/Enabling+the+Auto-Update
      */
+
     public function install()
     {
+        // install tab
+        foreach ($this->getTabs() as $tab) {
+            $this->installTab($this, $tab);
+        }
         Configuration::updateValue('CAMALOON_LIVE_MODE', false);
 
         include(dirname(__FILE__).'/sql/install.php');
@@ -94,9 +101,50 @@ class Camaloon extends Module
             array(
                 'name' => $this->l('Camaloon'),
                 'class_name' => self::HOME_CONTROLLER,
-                'ParentClassName' => 'SELL',
-            )
+                'parent' => 'SELL',
+            ),
+            array(
+                'name' =>  $this->l('home'),
+                'class_name' => self::CONNECT_CONTROLLER,
+                'parent' => self::HOME_CONTROLLER,
+            ),
+            array(
+                'name' => $this->l('status'),
+                'class_name' => self::STATUS_CONTROLLER,
+                'parent' => self::HOME_CONTROLLER,
+            ),
+            array(
+                'name' => $this->l('support'),
+                'class_name' => self::SUPPORT_CONTROLLER,
+                'parent' => self::HOME_CONTROLLER,
+            ),
         );
+    }
+
+    
+    public function installTab($module, $tabData)
+    {
+        $className = isset($tabData['class_name']) ? $tabData['class_name'] : null;
+        $parent = isset($tabData['parent']) ? $tabData['parent'] : null;
+        $tabName = isset($tabData['name']) ? $tabData['name'] : null;
+
+        if (!$className) {
+            return 0;
+        }
+
+        $tab = new Tab();
+        $tab->id_parent = $parent ? Tab::getIdFromClassName($parent) : "-1";
+        $tab->name = array();
+        foreach (Language::getLanguages(true) as $lang) {
+            $tab->name[$lang['id_lang']] = $tabName;
+        }
+        $tab->class_name = $className;
+        $tab->module = $module->name;
+        $tab->active = 1;
+
+        $result = $tab->add();
+
+        return  $result;
     }
 
 

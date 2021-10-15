@@ -2,7 +2,7 @@
 
 require_once("CamaloonPluginController.php");
 
-class CamaloonHomeController extends CamaloonPluginController
+class CamaloonStatusController extends CamaloonPluginController
 {
     public function initContent()
     {
@@ -11,8 +11,8 @@ class CamaloonHomeController extends CamaloonPluginController
         // $this->addCSS(_PS_ADMIN_DIR_ . '/themes/new-theme/public/theme.css');
         // $this->addCSS($this->getCssPath('home.css'));
 
-        $this->renderTemplate('home', array(
-            'title' => 'Camaloon Print on Demand'
+        $this->renderTemplate('status', array(
+            'title' => 'Status'
         ));
     }
 }
