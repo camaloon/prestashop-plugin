@@ -8,6 +8,7 @@ class CamaloonPluginController extends ModuleAdminController
     {
         parent::__construct();
         $this->smarty = $this->context->smarty;
+        $this->bootstrap = true;
 
         // $this->addCSS($this->getCssPath('global.css'));
     }
