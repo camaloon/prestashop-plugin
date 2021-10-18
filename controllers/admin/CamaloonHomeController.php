@@ -8,8 +8,8 @@ class CamaloonHomeController extends CamaloonPluginController
     {
         parent::initContent();
 
-        $this->renderTemplate('home', array(
-            'title' => 'Camaloon Print on Demand'
+        $this->renderTemplate($this->l('home'), array(
+            'title' => $this->l('Camaloon Print on Demand')
         ));
     }
 }

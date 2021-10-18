@@ -31,7 +31,7 @@ class CamaloonConnectController extends CamaloonPluginController
         $this->addCSS($this->getCssPath('connect.css'));
 
         $this->renderTemplate('connect', array(
-            'title' => 'Camaloon Print on Demand',
+            'title' => $this->l('Camaloon Print on Demand'),
             'connectUrl' => $connectControllerLink . '&action=' . self::CONNECT_ACTION,
             'disconnectUrl' => $connectControllerLink . '&action=' . self::DISCONNECT_ACTION,
             'statusUrl' => $this->context->link->getAdminLink(Camaloon::STATUS_CONTROLLER),
