@@ -28,14 +28,24 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+if(!defined('STDOUT')) define('STDOUT', fopen('php://stdout', 'wb'));
+
 class Camaloon extends Module
 {
     protected $config_form = false;
 
+    const CAMALOON_HOST = 'https://dev.camaloon.com:5001';
+
+    // Plugin controllers
     const HOME_CONTROLLER = 'CamaloonHome';
     const CONNECT_CONTROLLER = 'CamaloonConnect';
     const STATUS_CONTROLLER = 'CamaloonStatus';
     const SUPPORT_CONTROLLER = 'CamaloonSupport';
+
+    // Configuration table keys
+    const CONFIG_WEBSERVICE_KEY_ID = 'CAMALOON_WEBSERVICE_KEY_ID';
+    const CONFIG_IS_FIRST_CONNECTION = 'CAMALOON_IS_FIRST_CONNECTION';
+    const CONFIG_API_KEY = 'CAMALOON_API_KEY';
 
     public function __construct()
     {
@@ -52,7 +62,7 @@ class Camaloon extends Module
         $this->displayName = $this->l('Camaloon Print on Demand');
         $this->description = $this->l('Print-on-demand is a process where you sell your own custom branded designs on a variety of different products. With print-on-demand there is no need to have any inventory, as products are printed as soon as an order is made through your store.');
 
-        $this->confirmUninstall = $this->l('');
+        $this->confirmUninstall = $this->l('Are you sure you want to uninstall the camaloon plugin?');
 
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
     }
@@ -62,6 +72,14 @@ class Camaloon extends Module
         $autoLoadPath = $this->getLocalPath() . 'vendor/autoload.php';
 
         require_once $autoLoadPath;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getStoreAddress()
+    {
+        return Tools::getHttpHost(false) . __PS_BASE_URI__;
     }
 
     /**
@@ -121,7 +139,7 @@ class Camaloon extends Module
         );
     }
 
-    
+
     public function installTab($module, $tabData)
     {
         $className = isset($tabData['class_name']) ? $tabData['class_name'] : null;
@@ -152,6 +170,17 @@ class Camaloon extends Module
     {
         $redirectLink = $this->context->link->getAdminLink(self::HOME_CONTROLLER);
         Tools::redirectAdmin($redirectLink);
+    }
+
+    public static function getService($className)
+    {
+        if (class_exists('Adapter_ServiceLocator')) {
+            return Adapter_ServiceLocator::get($className);
+        } elseif (class_exists('PrestaShop\PrestaShop\Adapter\ServiceLocator')) {
+            return PrestaShop\PrestaShop\Adapter\ServiceLocator::get($className);
+        }
+
+        throw new Exception('No service locator found');
     }
 
     /**

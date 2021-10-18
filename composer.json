@@ -1,1 +1,13 @@
-{}
+{
+  "name": "camaloon/camaloon",
+  "description": "...",
+  "autoload": {
+    "psr-4": {
+      "Camaloon\\": "src/"
+    }
+  },
+  "config": {
+      "prepend-autoloader": false
+  },
+  "type": "prestashop-module"
+}

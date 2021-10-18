@@ -8,9 +8,6 @@ class CamaloonStatusController extends CamaloonPluginController
     {
         parent::initContent();
 
-        // $this->addCSS(_PS_ADMIN_DIR_ . '/themes/new-theme/public/theme.css');
-        // $this->addCSS($this->getCssPath('home.css'));
-
         $this->renderTemplate('status', array(
             'title' => 'Status'
         ));
