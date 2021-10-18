@@ -1,5 +1,5 @@
-#subtab-CamaloonHome > a:before {
-    background: url('../../logo.png') no-repeat center;
+#maintab-CamaloonHome > a:before {
+    background: url('../img/camaloon-icon.svg') no-repeat center;
     background-size: contain;
     content: '';
     width: 19px;
@@ -8,6 +8,6 @@
     vertical-align: middle;
 }
 
-#subtab-CamaloonHome > a > i {
+.icon-CamaloonHome {
   display:none;
 }

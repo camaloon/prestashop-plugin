@@ -50,7 +50,7 @@ class Camaloon extends Module
         $this->autoLoad();
 
         $this->displayName = $this->l('Camaloon Print on Demand');
-        $this->description = $this->l('Camaloon Print on Demand');
+        $this->description = $this->l('Print-on-demand is a process where you sell your own custom branded designs on a variety of different products. With print-on-demand there is no need to have any inventory, as products are printed as soon as an order is made through your store.');
 
         $this->confirmUninstall = $this->l('');
 
