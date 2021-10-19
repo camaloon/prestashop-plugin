@@ -7,10 +7,10 @@ class CamaloonPluginController extends ModuleAdminController
     public function __construct()
     {
         parent::__construct();
-        $this->smarty = $this->context->smarty;
+
         $this->bootstrap = true;
 
-        // $this->addCSS($this->getCssPath('global.css'));
+        $this->smarty = $this->context->smarty;
     }
 
     protected function renderTemplate($templateName, $params = array())
@@ -26,6 +26,6 @@ class CamaloonPluginController extends ModuleAdminController
 
     protected function getCssPath($filename)
     {
-        return $this->module->getWebPath() . 'views/css/' . $filename;
+        return $this->module->getLocalPath() . 'views/css/' . $filename;
     }
 }
