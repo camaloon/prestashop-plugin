@@ -1,5 +1,20 @@
 # Camaloon Print on Demand
 
+## Release
+
+To generate a release zip run:
+
+Give permissions to the release script
+```bash
+chmod +x release.sh
+```
+
+Generate the release zip file
+
+```bash
+./release.sh
+```
+
 ## Development environment
 
 ### Setup
@@ -34,7 +49,7 @@
       "author": "name",
       "license": "Camaloon"
   }
- 
+
  Replace name by your name and email by your email.
 
 - run composer dump-autoload (you should see Generated autoload files)
