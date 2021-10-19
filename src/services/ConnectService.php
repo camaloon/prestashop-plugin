@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PrestaShop module for Camaloon
  *

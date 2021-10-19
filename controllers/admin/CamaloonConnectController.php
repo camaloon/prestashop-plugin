@@ -52,7 +52,8 @@ class CamaloonConnectController extends CamaloonPluginController
         return true;
     }
 
-    public function connectAction() {
+    public function connectAction()
+    {
         // asures webservice prestashop feature is enabled
         $this->webserviceService->enableWebservice();
 
@@ -60,7 +61,7 @@ class CamaloonConnectController extends CamaloonPluginController
         $webService = $this->webserviceService->getConnectedWebservice();
 
         // otherwise, create a new one
-        if(!$webService) {
+        if (!$webService) {
             $webService = $this->webserviceService->createNewWebservice();
         }
 
@@ -74,24 +75,26 @@ class CamaloonConnectController extends CamaloonPluginController
         Tools::redirect($redirectUrl);
     }
 
-    public function disconnectAction() {
+    public function disconnectAction()
+    {
         $this->connectService->disconnect();
 
         // TODO: Should we notify camaloon?
 
         $this->warnings[] = $this->module->l('You have successfully disconnected your store from Camaloon.');
-  }
+    }
 
-  // Only renders connection message on the first access after connection attempt.
-  public function loadConnectionMessages($connected) {
-      if (Configuration::get(Camaloon::CONFIG_IS_FIRST_CONNECTION)) {
-          if ($connected) {
-              $this->informations[] = $this->module->l('You have successfully connected to Camaloon');
-          } else {
-              $this->errors[] = $this->module->l('Your connection to Camaloon failed');
-          }
+    // Only renders connection message on the first access after connection attempt.
+    public function loadConnectionMessages($connected)
+    {
+        if (Configuration::get(Camaloon::CONFIG_IS_FIRST_CONNECTION)) {
+            if ($connected) {
+                $this->informations[] = $this->module->l('You have successfully connected to Camaloon');
+            } else {
+                $this->errors[] = $this->module->l('Your connection to Camaloon failed');
+            }
 
-          Configuration::updateValue(Camaloon::CONFIG_IS_FIRST_CONNECTION, false);
-      }
-  }
+            Configuration::updateValue(Camaloon::CONFIG_IS_FIRST_CONNECTION, false);
+        }
+    }
 }
