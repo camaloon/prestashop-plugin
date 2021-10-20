@@ -7,9 +7,12 @@ class CamaloonStatusController extends CamaloonPluginController
     public function initContent()
     {
         parent::initContent();
+        $this->checksService = Camaloon::getService(Camaloon\services\CamaloonChecksService::class);
 
-        $this->renderTemplate('status', array(
-            'title' => 'Status'
+        $this->addCSS($this->module->getLocalPath() . 'views/css/status.css');
+        $this->renderTemplate($this->l('status'), array(
+            'title' => $this->l('Status'),
+            'items' => $this->checksService->camaloon_getChecklistItems()
         ));
     }
 }

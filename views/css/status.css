@@ -1,0 +1,16 @@
+.status-container .description{
+  margin: 1rem 0;
+}
+
+.status-container .table-responsive-row {
+  margin-top: 2rem;
+}
+
+.status-container .table-responsive-row td{
+  padding: 1rem 2rem !important;
+}
+
+.status-container .table-responsive-row thead h3{
+  margin: 0px !important;
+  padding: 0px !important;
+}
