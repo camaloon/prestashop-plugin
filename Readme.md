@@ -34,7 +34,7 @@
       "author": "name",
       "license": "Camaloon"
   }
- 
+
  Replace name by your name and email by your email.
 
 - run composer dump-autoload (you should see Generated autoload files)
@@ -58,3 +58,12 @@ Important thing is `.env` file to setup project, you can check all things that c
 - the archive should have folder plugin on top level
 - the folder name should match plugin name
 - we cannot put plugin files to the top level
+
+#### Create a release
+
+1. Add changes to `./CHANGELOG.md`.
+2. Change the version in `./config.xml`.
+3. Push to upstream: `git add . && git commit -m "commit message" && git push`.
+4. Create PR and merge to master
+
+A github action will create the artifact and the release

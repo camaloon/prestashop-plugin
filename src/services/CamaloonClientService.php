@@ -44,7 +44,7 @@ class CamaloonClientService
             throw new CamaloonException('PHP JSON extension is required for the Camaloon API library to work!');
         }
         //setup api host
-        $this->apiUrl = 'https://camaloon.com';
+        $this->apiUrl = 'https://dev.camaloon.com';
     }
 
     /**

@@ -32,8 +32,7 @@ class Camaloon extends Module
 {
     protected $config_form = false;
 
-    //for development use your host, for example: https://dev.camaloon.com:5001
-    const CAMALOON_HOST = 'https://camaloon.com';
+    const CAMALOON_HOST = 'https://dev.camaloon.com';
 
     // Plugin controllers
     const HOME_CONTROLLER = 'CamaloonHome';
@@ -52,7 +51,7 @@ class Camaloon extends Module
         $this->name = 'camaloon';
         $this->tab = 'others';
         $this->version = '1.0.0';
-        $this->author = 'Camaloon';
+        $this->author = 'Camalize S.L.';
         $this->need_instance = 1;
         $this->bootstrap = true;
 
