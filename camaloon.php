@@ -45,6 +45,7 @@ class Camaloon extends Module
     const CONFIG_WEBSERVICE_KEY_ID = 'CAMALOON_WEBSERVICE_KEY_ID';
     const CONFIG_IS_FIRST_CONNECTION = 'CAMALOON_IS_FIRST_CONNECTION';
     const CONFIG_API_KEY = 'CAMALOON_API_KEY';
+    const CONFIG_STORE_ID = 'CAMALOON_STORE_ID';
 
     public function __construct()
     {

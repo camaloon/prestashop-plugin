@@ -57,10 +57,11 @@ class ConnectService
     public function isConnected()
     {
         $apiKey = Configuration::get(Camaloon::CONFIG_API_KEY);
+        $storeId = Configuration::get(Camaloon::CONFIG_STORE_ID);
         $serviceKeyId = Configuration::get(Camaloon::CONFIG_WEBSERVICE_KEY_ID);
         $webService = $this->webserviceService->getWebserviceById($serviceKeyId);
 
-        return $apiKey && $webService;
+        return $storeId && $apiKey && $webService;
     }
 
     /**
@@ -91,5 +92,6 @@ class ConnectService
     {
         Configuration::deleteByName(Camaloon::CONFIG_WEBSERVICE_KEY_ID);
         Configuration::deleteByName(Camaloon::CONFIG_API_KEY);
+        Configuration::deleteByName(Camaloon::CONFIG_STORE_ID);
     }
 }
