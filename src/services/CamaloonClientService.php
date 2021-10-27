@@ -7,7 +7,8 @@ use Exception;
 class CamaloonClientService
 {
     private $apiUrl;
-
+    const STORE_STATUS_URL = '/print_on_demand/api/prestashop/stores/store_status/';
+    const DISCONNECT_STORE_URL = '/print_on_demand/api/prestashop/stores/disconnect_store/';
     /**
      * @param string $host_param Host for api data
      *
@@ -116,7 +117,7 @@ class CamaloonClientService
 
         switch ($http_status) {
       case 200:
-        return json_decode($response, true)['result'];
+        return json_decode($response, true);
       default:
         return false;
     }
