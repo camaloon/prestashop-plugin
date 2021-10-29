@@ -12,8 +12,8 @@ prepare:
 	mkdir -p ${FOLDER}/src;cp -R src ${FOLDER}
 	mkdir -p ${FOLDER}/translations;cp -R translations ${FOLDER}
 	mkdir -p ${FOLDER}/upgrade;cp -R upgrade ${FOLDER}
-	mkdir -p ${FOLDER}/vendor;cp -R vendor ${FOLDER}
 	mkdir -p ${FOLDER}/views;cp -R views ${FOLDER};rm ${FOLDER}/views/.DS_Store
+	mkdir -p ${FOLDER}/vendor;cp -R vendor ${FOLDER}
 	cp camaloon.php ${FOLDER}/camaloon.php
 	cp composer.json ${FOLDER}/composer.json
 	cp config.xml ${FOLDER}/config.xml

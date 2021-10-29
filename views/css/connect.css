@@ -19,7 +19,7 @@
 .camaloon-connect-block .btn-camaloon{
     margin: 20px auto;
     color:white;
-    font-weight:600;
+    font-weight: normal;
     background-color: #39B75D;
     font-size: 18px;
     padding: 15px;
@@ -30,20 +30,23 @@
     background-color: #319E50;
 }
 
-.camaloon-connect-block h6{
+.camaloon-connect-block p{
     font-size: 22px;
-    line-height: 19px;
+    line-height: 20px;
     text-align: center;
     color: #000000;
     font-weight: normal;
+    margin: 0px !important;
+    margin-top: 20px !important;
+    text-transform: none !important;
 }
 
 .camaloon-connect-block .support{
-    margin-top: 100px;
+    margin-top: 2rem;
 }
 
 .camaloon-connect-block .support p{
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .camaloon-connect-block .support .btn-blue{
@@ -53,4 +56,17 @@
     margin: 20px auto;
     color: #426EFF;
     width: 100%;
+}
+
+.white-content-box {
+    padding: 2rem !important;
+    background-color: white;
+}
+
+.padding-right-white {
+    padding-right: 2rem !important;
+}
+
+.padding-left-white {
+    padding-left: 2rem !important;
 }

@@ -33,3 +33,15 @@
 .support-note{
   margin-bottom: 1rem;
 }
+
+h2 {
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  line-height: 21px !important;
+  text-transform: none !important;
+}
+
+.faq h2{
+  font-size: 18px !important;
+}

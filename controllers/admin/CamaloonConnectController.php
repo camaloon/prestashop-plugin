@@ -1,4 +1,28 @@
 <?php
+/**
+ * 2007-2021 PrestaShop
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+ * versions in the future. If you wish to customize PrestaShop for your
+ * needs please refer to http://www.prestashop.com for more information.
+ *
+ *  @author    PrestaShop SA <contact@prestashop.com>
+ *  @copyright 2007-2021 PrestaShop SA
+ *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *  International Registered Trademark & Property of PrestaShop SA
+ */
 
 require_once("CamaloonPluginController.php");
 
@@ -30,7 +54,7 @@ class CamaloonConnectController extends CamaloonPluginController
         $this->loadConnectionMessages($connected);
 
         $this->addCSS($this->getCssPath('connect.css'));
-        $this->checkForStore($connectControllerLink);
+        $this->checkForStore();
 
         $this->renderTemplate('connect', array(
             'title' => $this->l('Camaloon Print on Demand'),
@@ -47,7 +71,7 @@ class CamaloonConnectController extends CamaloonPluginController
     {
         if (Tools::getValue('action') == self::CONNECT_ACTION) {
             $this->connectAction();
-        } else if (Tools::getValue('action') == self::DISCONNECT_ACTION) {
+        } elseif (Tools::getValue('action') == self::DISCONNECT_ACTION) {
             $this->disconnectAction();
         }
 
@@ -77,27 +101,28 @@ class CamaloonConnectController extends CamaloonPluginController
         Tools::redirect($redirectUrl);
     }
 
-    public function disconnectAction($deleteCamaloonInfo=true)
+    public function disconnectAction($deleteCamaloonInfo = true)
     {
-        if($deleteCamaloonInfo === true){
+        if ($deleteCamaloonInfo === true) {
             $webService = $this->webserviceService->getConnectedWebservice();
         
             if ($webService !== null) {
-                $response = $this->clientService->put(Camaloon\services\CamaloonClientService::DISCONNECT_STORE_URL.$webService->key);
+                $deleteUrl = Camaloon\services\CamaloonClientService::DISCONNECT_STORE_URL.$webService->key;
+                $this->clientService->put($deleteUrl);
             }
         }
         $this->connectService->disconnect();
         $this->warnings[] = $this->module->l('Your store has been disconnected');
-        
     }
 
-    public function checkForStore($connectControllerLink)
+    public function checkForStore()
     {
         $webService = $this->webserviceService->getConnectedWebservice();
         
-        if($webService !== null){
-            $response = $this->clientService->get(Camaloon\services\CamaloonClientService::STORE_STATUS_URL.$webService->key);
-            if($response['status'] === 404 || $response['result'] && $response['result']['inactive'] === true){
+        if ($webService !== null) {
+            $statusUrl = Camaloon\services\CamaloonClientService::STORE_STATUS_URL.$webService->key;
+            $response = $this->clientService->get($statusUrl);
+            if ($response['status'] === 404 || $response['result'] && $response['result']['inactive'] === true) {
                 $this->disconnectAction(false);
                 Tools::redirectAdmin($this->context->link->getAdminLink(Camaloon::CONNECT_CONTROLLER));
             }
