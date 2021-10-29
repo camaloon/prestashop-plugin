@@ -13,6 +13,7 @@ class CamaloonConnectController extends CamaloonPluginController
 
         $this->connectService = Camaloon::getService(Camaloon\services\ConnectService::class);
         $this->webserviceService = Camaloon::getService(Camaloon\services\WebserviceService::class);
+        $this->clientService = Camaloon::getService(Camaloon\services\CamaloonClientService::class);
     }
 
     public function initContent()
@@ -29,6 +30,7 @@ class CamaloonConnectController extends CamaloonPluginController
         $this->loadConnectionMessages($connected);
 
         $this->addCSS($this->getCssPath('connect.css'));
+        $this->checkForStore($connectControllerLink);
 
         $this->renderTemplate('connect', array(
             'title' => $this->l('Camaloon Print on Demand'),
@@ -75,13 +77,31 @@ class CamaloonConnectController extends CamaloonPluginController
         Tools::redirect($redirectUrl);
     }
 
-    public function disconnectAction()
+    public function disconnectAction($deleteCamaloonInfo=true)
     {
+        if($deleteCamaloonInfo === true){
+            $webService = $this->webserviceService->getConnectedWebservice();
+        
+            if ($webService !== null) {
+                $response = $this->clientService->put(Camaloon\services\CamaloonClientService::DISCONNECT_STORE_URL.$webService->key);
+            }
+        }
         $this->connectService->disconnect();
+        $this->warnings[] = $this->module->l('Your store has been disconnected');
+        
+    }
 
-        // TODO: Should we notify camaloon?
-
-        $this->warnings[] = $this->module->l('You have successfully disconnected your store from Camaloon.');
+    public function checkForStore($connectControllerLink)
+    {
+        $webService = $this->webserviceService->getConnectedWebservice();
+        
+        if($webService !== null){
+            $response = $this->clientService->get(Camaloon\services\CamaloonClientService::STORE_STATUS_URL.$webService->key);
+            if($response['status'] === 404 || $response['result'] && $response['result']['inactive'] === true){
+                $this->disconnectAction(false);
+                Tools::redirectAdmin($this->context->link->getAdminLink(Camaloon::CONNECT_CONTROLLER));
+            }
+        }
     }
 
     // Only renders connection message on the first access after connection attempt.

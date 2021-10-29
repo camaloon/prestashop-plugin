@@ -11,7 +11,7 @@ class CamaloonSupportController extends CamaloonPluginController
         $this->checksService = Camaloon::getService(Camaloon\services\CamaloonChecksService::class);
         $this->clientService = Camaloon::getService(Camaloon\services\CamaloonClientService::class);
 
-        $response = $this->clientService->get('/api/print_on_demand/faqs?target=prestashop');
+        $response = $this->clientService->get('/api/print_on_demand/faqs?target=prestashop')['result'];
         $iso_code = $this->context->language->language_code;
 
         $this->setMedia();
