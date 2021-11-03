@@ -1,5 +1,4 @@
 <?php
-
 /**
  * PrestaShop module for Camaloon
  *
@@ -27,15 +26,24 @@ class WebserviceService
     const WEBSERVICE_KEY_LENGTH = 32;
 
     const PS_RESOURCES = array(
-        'addresses', 'carriers', 'carts', 'cart_rules', 'categories', 'combinations', 'configurations',
-        'contacts', 'countries', 'currencies', 'customers', 'customer_threads', 'customer_messages', 'deliveries',
-        'groups', 'guests', 'images', 'image_types', 'languages', 'manufacturers', 'messages', 'order_carriers', 'order_details',
-        'order_histories', 'order_invoices', 'orders', 'order_payments', 'order_states', 'order_slip', 'price_ranges', 'product_features',
-        'product_feature_values', 'product_options', 'product_option_values', 'products', 'states', 'stores', 'suppliers', 'tags',
-        'translated_configurations', 'weight_ranges', 'zones', 'employees', 'search', 'content_management_system', 'shops', 'shop_groups',
-        'taxes', 'stock_movements', 'stock_movement_reasons', 'warehouses', 'stocks', 'stock_availables', 'warehouse_product_locations',
-        'supply_orders', 'supply_order_details', 'supply_order_states', 'supply_order_histories', 'supply_order_receipt_histories', 'product_suppliers',
-        'tax_rules', 'tax_rule_groups', 'specific_prices', 'specific_price_rules', 'shop_urls', 'product_customization_fields', 'customizations'
+        'addresses', 'carriers', 'carts', 'cart_rules', 'categories'
+        , 'combinations', 'configurations',
+        'contacts', 'countries', 'currencies', 'customers', 'customer_threads'
+        , 'customer_messages', 'deliveries',
+        'groups', 'guests', 'images', 'image_types', 'languages', 'manufacturers'
+        , 'messages', 'order_carriers', 'order_details',
+        'order_histories', 'order_invoices', 'orders', 'order_payments', 'order_states',
+        'order_slip', 'price_ranges', 'product_features',
+        'product_feature_values', 'product_options', 'product_option_values', 'products',
+        'states', 'stores', 'suppliers', 'tags',
+        'translated_configurations', 'weight_ranges', 'zones', 'employees', 'search',
+        'content_management_system', 'shops', 'shop_groups',
+        'taxes', 'stock_movements', 'stock_movement_reasons', 'warehouses', 'stocks',
+        'stock_availables', 'warehouse_product_locations',
+        'supply_orders', 'supply_order_details', 'supply_order_states', 'supply_order_histories',
+        'supply_order_receipt_histories', 'product_suppliers',
+        'tax_rules', 'tax_rule_groups', 'specific_prices', 'specific_price_rules', 'shop_urls',
+        'product_customization_fields', 'customizations'
     );
 
     const PS_ALL_PERMISSIONS = array(

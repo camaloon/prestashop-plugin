@@ -1,5 +1,4 @@
 <?php
-
 /**
  * 2007-2021 PrestaShop
  *
@@ -29,13 +28,12 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-if (!defined('STDOUT')) define('STDOUT', fopen('php://stdout', 'wb'));
-
 class Camaloon extends Module
 {
     protected $config_form = false;
 
-    const CAMALOON_HOST = 'https://dev.camaloon.com:5001';
+    //for development use your host, for example: https://dev.camaloon.com:5001
+    const CAMALOON_HOST = 'https://camaloon.com';
 
     // Plugin controllers
     const HOME_CONTROLLER = 'CamaloonHome';
@@ -51,7 +49,7 @@ class Camaloon extends Module
     public function __construct()
     {
         $this->name = 'camaloon';
-        $this->tab = 'other_modules';
+        $this->tab = 'others';
         $this->version = '1.0.0';
         $this->author = 'Camaloon';
         $this->need_instance = 1;
@@ -61,7 +59,9 @@ class Camaloon extends Module
         $this->autoLoad();
 
         $this->displayName = $this->l('Camaloon Print on Demand');
-        $this->description = $this->l('Print-on-demand is a process where you sell your own custom branded designs on a variety of different products. With print-on-demand there is no need to have any inventory, as products are printed as soon as an order is made through your store.');
+        $this->description = $this->l('Print-on-demand is a process where you sell your own custom 
+        branded designs on a variety of different products. With print-on-demand there is no need 
+        to have any inventory, as products are printed as soon as an order is made through your store.');
 
         $this->confirmUninstall = $this->l('Are you sure you want to uninstall the camaloon plugin?');
 

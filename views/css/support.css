@@ -12,6 +12,14 @@
   list-style-type: none;
 }
 
+.white-box-ordered ol {
+  list-style: decimal;
+}
+
+.white-box-ordered ol li {
+  margin-left: 15px;
+}
+
 .faqs-container .description{
   margin: 1rem 0;
 }
@@ -32,4 +40,16 @@
 
 .support-note{
   margin-bottom: 1rem;
+}
+
+h2 {
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  line-height: 21px !important;
+  text-transform: none !important;
+}
+
+.faq h2{
+  font-size: 18px !important;
 }
