@@ -31,7 +31,7 @@
           {l s='Getting started made easy. Read the FAQs to jumpstart your business.' mod='camaloon'}
         </div>
       </p>
-      <div class="white-content-box white-content-box-left">
+      <div class="white-content-box white-box-ordered white-content-box-left">
         {foreach key=key item=faq from=$faqs}
             <div class="faq">
               <h2>{html_entity_decode($faq["question_{$iso_code}"]|escape:'htmlall':'UTF-8')}</h2>

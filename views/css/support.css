@@ -12,6 +12,14 @@
   list-style-type: none;
 }
 
+.white-box-ordered ol {
+  list-style: decimal;
+}
+
+.white-box-ordered ol li {
+  margin-left: 15px;
+}
+
 .faqs-container .description{
   margin: 1rem 0;
 }
