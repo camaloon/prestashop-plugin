@@ -1,5 +1,5 @@
 {*
- 
+   
  * 2007-2021 PrestaShop
  *
  * NOTICE OF LICENSE
@@ -22,12 +22,12 @@
  *  @copyright 2007-2021 PrestaShop SA
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
- 
-*}
-<div class="container-fluid">
+   
+ *}
+<div class="container-fluid status-container-block">
   <div class="row">
     <div class="col-md-12 status-container">
-      <h2>{l s='System status' mod='camaloon'}</h2>
+      <h3 class="system-status">{l s='System status' mod='camaloon'}</h3>
       <div class="description">
         {l s='Review the status of your connection. Errors in the connection of your store setup may cause the Camaloon integration to not work as intended.' mod='camaloon'}
       </div>

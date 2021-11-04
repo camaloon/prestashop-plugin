@@ -22,7 +22,7 @@
  *  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  *}
-<div class="container-fluid">
+<div class="container-fluid support-container-block">
   <div class="row">
     <div class="col-md-12 faqs-container">
       <p>
