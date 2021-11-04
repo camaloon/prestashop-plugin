@@ -1,10 +1,10 @@
-*{
-  font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
-}
-
-.status-container-block {
+.status-container-block{
     margin: 0px 20px !important;
     padding: 0px !important;
+}
+
+.status-container-block * {
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
 
 .status-container .description{
@@ -20,8 +20,17 @@
   padding: 0px !important;
   border-bottom: none !important;
   text-transform: none !important;
-  font-size: 16px !important;
-  font-weight: bold;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  text-transform: none !important;
+  color: rgb(85,85,85);
+}
+
+.status-container-block h3 {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  text-transform: none !important;
+  color: rgb(85,85,85) !important;
 }
 
 .status-container .table-responsive-row tbody td {

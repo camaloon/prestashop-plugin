@@ -1,9 +1,7 @@
-*{
-  font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
-}
 .camaloon-connect-block{
     text-align:center;
     margin: 0px 20px !important;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
 
 .alert {
