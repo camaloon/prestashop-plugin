@@ -110,4 +110,16 @@ class CamaloonChecksService
             ]
         ];
     }
+
+    public static function camaloonChecksFailed()
+    {
+        $items = CamaloonChecksService::camaloonGetChecklistItems();
+        $status = 1;
+        foreach ($items as $item) {
+            if (1 != $item['value']) {
+                $status = -1;
+            }
+        }
+        return $status;
+    }
 }

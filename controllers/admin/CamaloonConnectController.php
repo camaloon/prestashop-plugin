@@ -38,6 +38,7 @@ class CamaloonConnectController extends CamaloonPluginController
         $this->connectService = Camaloon::getService(Camaloon\services\ConnectService::class);
         $this->webserviceService = Camaloon::getService(Camaloon\services\WebserviceService::class);
         $this->clientService = Camaloon::getService(Camaloon\services\CamaloonClientService::class);
+        $this->checksService = Camaloon::getService(Camaloon\services\CamaloonChecksService::class);
     }
 
     public function initContent()
@@ -65,6 +66,11 @@ class CamaloonConnectController extends CamaloonPluginController
             'connectImgUrl' => $this->module->getPathUri() . 'views/img/camaloon-homepage.svg',
             'connected' => $connected
         ));
+
+        if ($this->checksService->camaloonChecksFailed() === -1) {
+            $this->errors[] =  $this->module->l('Something went wrong with the connection. 
+Please check status section or try again.');
+        }
     }
 
     public function postProcess()
