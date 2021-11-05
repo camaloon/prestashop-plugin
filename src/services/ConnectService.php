@@ -64,6 +64,11 @@ class ConnectService
         return $storeId && $apiKey && $webService;
     }
 
+    public function getStoreId()
+    {
+        return Configuration::get(Camaloon::CONFIG_STORE_ID);
+    }
+
     /**
      * @return string
      */
@@ -78,11 +83,15 @@ class ConnectService
         $url = Camaloon::CAMALOON_HOST . self::CONNECT_URL;
         $callbackUrl = $this->buildCallbackUrl();
 
+        $array = explode("/",_PS_ADMIN_DIR_);
+        $adminUrl = $array[count($array)-1];
+
         $params = array(
             'domain' => Camaloon::getStoreAddress(),
             'ssl_enabled' => !!Configuration::get('PS_SSL_ENABLED'),
             'webservice_key' => $webService->key,
-            'callback_url' => $callbackUrl
+            'callback_url' => $callbackUrl,
+            'admin_url' => $adminUrl
         );
 
         return $url . '?' . http_build_query($params);

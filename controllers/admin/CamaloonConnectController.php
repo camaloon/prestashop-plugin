@@ -59,6 +59,7 @@ class CamaloonConnectController extends CamaloonPluginController
 
         $this->renderTemplate('connect', array(
             'title' => $this->l('Camaloon Print on Demand'),
+            'viewStoreUrl' => Camaloon::CAMALOON_HOST . "/print_on_demand/stores/" . $this->connectService->getStoreId() . "/edit",
             'connectUrl' => $connectControllerLink . '&action=' . self::CONNECT_ACTION,
             'disconnectUrl' => $connectControllerLink . '&action=' . self::DISCONNECT_ACTION,
             'statusUrl' => $this->context->link->getAdminLink(Camaloon::STATUS_CONTROLLER),
