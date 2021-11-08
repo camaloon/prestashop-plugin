@@ -28,7 +28,7 @@
 
   {if $connected}
     <p>{l s='Start selling! Create your first product!' mod='camaloon'}</p>
-    <a class="btn btn-camaloon" target= "_blank" href="{$connectUrl|escape:'htmlall':'UTF-8'}">{l s='Go to Camaloon store' mod='camaloon'}</a>
+    <a class="btn btn-camaloon" target= "_blank" href="{$viewStoreUrl|escape:'htmlall':'UTF-8'}">{l s='Go to Camaloon store' mod='camaloon'}</a>
 
     <form method="post" action="{$disconnectUrl|escape:'html':'UTF-8'}" id="CamaloonConnectForm">
       <button type="submit" class="btn btn-camaloon" name="camaloon_connect" data-connecting-text="{l s='Connecting...' d='Admin.Actions' mod='camaloon'}">
