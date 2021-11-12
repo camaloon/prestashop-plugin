@@ -29,7 +29,7 @@ namespace Camaloon\services;
 use Configuration;
 use Camaloon;
 use WebserviceKeyCore;
-
+use Tools;
 /**
  * Class ConnectService
  * @package Camaloon\services
@@ -86,12 +86,15 @@ class ConnectService
         $array = explode("/",_PS_ADMIN_DIR_);
         $adminUrl = $array[count($array)-1];
 
+
+
         $params = array(
             'domain' => Camaloon::getStoreAddress(),
             'ssl_enabled' => !!Configuration::get('PS_SSL_ENABLED'),
             'webservice_key' => $webService->key,
             'callback_url' => $callbackUrl,
-            'admin_url' => $adminUrl
+            'admin_url' => $adminUrl,
+            'token' => Tools::getValue('token')
         );
 
         return $url . '?' . http_build_query($params);
