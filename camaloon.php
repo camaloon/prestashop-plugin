@@ -113,8 +113,13 @@ class Camaloon extends Module
         include(dirname(__FILE__) . '/sql/uninstall.php');
 
         // remove tabs
-        foreach (Tab::getCollectionFromModule($module->name) as $tab) {
-            $tab->delete();
+        $tabs = Tab::getCollectionFromModule($this->name);
+        // Check tabs
+        if ($tabs && count($tabs)) {
+            // Loop tabs for delete
+            foreach ($tabs as $tab) {
+                $result &= $tab->delete();
+            }
         }
         return parent::uninstall();
     }
