@@ -1,4 +1,4 @@
-#maintab-CamaloonHome > a:before {
+#maintab-CamaloonHome > a:before, #subtab-CamaloonHome > a:before {
     background: url('../img/camaloon-icon.svg') no-repeat center;
     background-size: contain;
     content: '';
