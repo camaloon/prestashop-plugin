@@ -119,7 +119,7 @@ Please check status section or try again.');
             }
         }
         $this->connectService->disconnect();
-        $this->warnings[] = $this->module->l('Your store has been disconnected');
+        $this->confirmations[] = $this->module->l('Your store has been disconnected');
     }
 
     public function checkForStore()
@@ -141,7 +141,7 @@ Please check status section or try again.');
     {
         if (Configuration::get(Camaloon::CONFIG_IS_FIRST_CONNECTION)) {
             if ($connected) {
-                $this->informations[] = $this->module->l('You have successfully connected to Camaloon');
+                $this->confirmations[] = $this->module->l('You have successfully connected to Camaloon');
             } else {
                 $this->errors[] = $this->module->l('Your connection to Camaloon failed');
             }
