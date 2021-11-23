@@ -78,7 +78,7 @@ class ConnectService
         return $adminLink;
     }
 
-    public function buildConnectUrl(WebserviceKeyCore $webService)
+    public function buildConnectUrl(WebserviceKeyCore $webService, $skip_redirect = false)
     {
         $url = Camaloon::CAMALOON_HOST . self::CONNECT_URL;
         $callbackUrl = $this->buildCallbackUrl();
@@ -94,7 +94,8 @@ class ConnectService
             'webservice_key' => $webService->key,
             'callback_url' => $callbackUrl,
             'admin_url' => $adminUrl,
-            'token' => Tools::getValue('token')
+            'token' => Tools::getValue('token'),
+            'skip_redirect_store' => $skip_redirect
         );
 
         return $url . '?' . http_build_query($params);

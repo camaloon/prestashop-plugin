@@ -104,8 +104,10 @@ Please check status section or try again.');
         // Save websersvice on configurations table
         $this->webserviceService->registerWebservice($webService);
 
-        $redirectUrl = $this->connectService->buildConnectUrl($webService);
+
+        $redirectUrl = $this->connectService->buildConnectUrl($webService, Tools::getValue('skip_redirect_store'));
         Tools::redirect($redirectUrl);
+
     }
 
     public function disconnectAction($deleteCamaloonInfo = true)
