@@ -44,7 +44,7 @@ class CamaloonClientService
             throw new CamaloonException('PHP JSON extension is required for the Camaloon API library to work!');
         }
         //setup api host
-        $this->apiUrl = 'https://camaloon.com';
+        $this->apiUrl = 'https://staging1.camaloon.com';
     }
 
     /**
@@ -132,6 +132,7 @@ class CamaloonClientService
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_POST => 1,
             CURLOPT_POSTFIELDS => $data,
+            CURLOPT_USERPWD => 'qa_testing' . ":" . 'camaloon',
         ]);
 
         $response = curl_exec($curl);

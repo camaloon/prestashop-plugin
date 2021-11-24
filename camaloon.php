@@ -33,7 +33,7 @@ class Camaloon extends Module
     protected $config_form = false;
 
     //for development use your host, for example: https://dev.camaloon.com:5001
-    const CAMALOON_HOST = 'https://camaloon.com';
+    const CAMALOON_HOST = 'https://staging1.camaloon.com';
 
     // Plugin controllers
     const HOME_CONTROLLER = 'CamaloonHome';
