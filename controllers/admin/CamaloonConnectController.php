@@ -68,7 +68,7 @@ class CamaloonConnectController extends CamaloonPluginController
             'connected' => $connected
         ));
 
-        if ($this->checksService->camaloonChecksFailed() === -1) {
+        if ($this->checksService->camaloonChecksFailed() === -1 && isset($_COOKIE["pluginInstalledAlert"])) {
             $this->errors[] =  $this->module->l('Something went wrong with the connection. 
 Please check status section or try again.');
         }

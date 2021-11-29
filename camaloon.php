@@ -179,7 +179,7 @@ class Camaloon extends Module
 
     public function getContent()
     {
-        $redirectLink = $this->context->link->getAdminLink(self::HOME_CONTROLLER);
+        $redirectLink = $this->context->link->getAdminLink(self::CONNECT_CONTROLLER);
         Tools::redirectAdmin($redirectLink);
     }
 

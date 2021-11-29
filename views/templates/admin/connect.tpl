@@ -40,7 +40,7 @@
     <p>{l s='Connect your store to Camaloon' mod='camaloon'}</p>
 
     <form method="post" action="{$connectUrl|escape:'html':'UTF-8'}" id="CamaloonConnectForm">
-      <button type="submit" class="btn btn-camaloon" name="camaloon_connect" data-connecting-text="{l s='Connecting...' d='Admin.Actions' mod='camaloon'}">
+      <button type="submit" class="btn btn-camaloon" name="camaloon_connect" data-connecting-text="{l s='Connecting...' d='Admin.Actions' mod='camaloon'}" onClick="setCookieFlashAlert()">
         {l s='Connect' mod='camaloon'}
       </button>
     </form>
@@ -62,3 +62,9 @@
     </div>
   </div>
 </div>
+
+<script>
+  function setCookieFlashAlert() {
+    document.cookie = "pluginInstalledAlert=true"
+  }
+</script>
