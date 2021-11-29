@@ -113,13 +113,15 @@ class Camaloon extends Module
         include(dirname(__FILE__) . '/sql/uninstall.php');
 
         // remove tabs
-        $tabs = Tab::getCollectionFromModule($this->name);
-        // Check tabs
-        if ($tabs && count($tabs)) {
+        if (version_compare(_PS_VERSION_, '1.6.1.24', '<=') === true) {
+          $tabs = Tab::getCollectionFromModule($this->name);
+          // Check tabs
+          if ($tabs && count($tabs)) {
             // Loop tabs for delete
             foreach ($tabs as $tab) {
                 $result &= $tab->delete();
             }
+          }
         }
         return parent::uninstall();
     }
@@ -134,7 +136,7 @@ class Camaloon extends Module
             ),
             array(
                 'name' =>  $this->l('home'),
-                'class_name' => self::CONNECT_CONTROLLER,
+                'class_name' => self::HOME_CONTROLLER,
                 'parent' => self::HOME_CONTROLLER,
             ),
             array(
