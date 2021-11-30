@@ -136,7 +136,7 @@ class Camaloon extends Module
             ),
             array(
                 'name' =>  $this->l('home'),
-                'class_name' => self::HOME_CONTROLLER,
+                'class_name' => self::CONNECT_CONTROLLER,
                 'parent' => self::HOME_CONTROLLER,
             ),
             array(
