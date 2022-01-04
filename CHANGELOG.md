@@ -1,2 +1,1 @@
-* Initial version
-* Updated documentation
+* Fix module installation
