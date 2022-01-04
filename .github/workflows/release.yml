@@ -1,0 +1,56 @@
+name: release
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build_release:
+    name: build_release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependecies
+        run: sudo apt-get install -y libxml2-utils zip php-cli unzip
+
+      - name: Install composer
+        run: |
+          curl -sS https://getcomposer.org/installer -o composer-setup.php
+          HASH=`curl -sS https://composer.github.io/installer.sig`
+          php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+          sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+          composer
+
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: version
+        run: echo "::set-output name=version-number::$(make version)"
+        id: version
+
+      - name: build artifacts
+        run: |
+          make clean
+          make build ENV=production
+
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.version.outputs.version-number }}
+          tag_name: v${{ steps.version.outputs.version-number }}
+          body_path: CHANGELOG.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: upload artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: camaloon.zip
+          asset_name: camaloon.zip
+          asset_content_type: application/gzip
